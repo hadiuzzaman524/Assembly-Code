@@ -1,0 +1,65 @@
+.MODEL SAMALL 
+.STACK 100H
+.DATA
+.CODE
+MAIN PROC
+    
+  
+  MOV AH,2
+  MOV DL,'1'
+  INT 21H  
+  
+  MOV AH,2
+  MOV DL,0DH
+  INT 21H
+  MOV DL,0AH
+  INT 21H  
+  
+   MOV AH,2
+  MOV DL,'3'
+  INT 21H  
+  
+  MOV AH,2
+  MOV DL,0DH
+  INT 21H
+  MOV DL,0AH
+  INT 21H    
+  
+   MOV AH,2
+  MOV DL,'5'
+  INT 21H  
+  
+  MOV AH,2
+  MOV DL,0DH
+  INT 21H
+  MOV DL,0AH
+  INT 21H
+  
+   MOV AH,2
+  MOV DL,'7'
+  INT 21H  
+  
+  MOV AH,2
+  MOV DL,0DH
+  INT 21H
+  MOV DL,0AH
+  INT 21H   
+  
+   MOV AH,2
+  MOV DL,'9'
+  INT 21H  
+  
+  MOV AH,2
+  MOV DL,0DH
+  INT 21H
+  MOV DL,0AH
+  INT 21H
+   
+   
+   
+   
+    
+MOV AH,4CH
+INT 21H
+MAIN ENDP 
+END MAIN

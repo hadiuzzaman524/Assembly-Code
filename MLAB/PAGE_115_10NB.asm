@@ -1,0 +1,57 @@
+.MODEL SMALL 
+.STACK 100H
+.DATA
+s1 DB 'ENTER A HEX DIGIT: $'  
+S2 DB 'ILLEGAL CHARACTER -ENTER 0..9 OR A..F..C: $'
+ 
+.CODE 
+
+MAIN PROC 
+  
+  
+  MOV AX,@DATA 
+  MOV DS,AX 
+ 
+  LEA DX,s1
+  MOV AH,9
+  INT 21H   
+  
+  
+  INPUT: 
+ MOV AH,1
+ INT 21H 
+ MOV BL,AL   
+ 
+ MOV AH,2
+ MOV DL,0DH 
+ INT 21H 
+ MOV DL,0AH 
+ INT 21H 
+ 
+ MOV CL,'0'
+ MOV CH,'F' 
+ 
+ CMP BL,CL 
+ JL FUN
+ CMP BL,CH
+ JG FUN 
+ 
+ 
+ FUN: 
+ LEA DX,S2
+ MOV AH,9
+ INT 21H   
+ JMP INPUT
+ 
+ 
+ MOV AH,2 
+ MOV DL,AL 
+ INT 21H 
+
+  
+
+END:
+MOV AH,4CH 
+INT 21H 
+MAIN ENDP 
+END MAIN 

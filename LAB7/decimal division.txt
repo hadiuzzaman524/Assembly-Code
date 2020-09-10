@@ -1,0 +1,95 @@
+.model small
+.stack 100h
+.data
+.code
+main proc
+     mov si,0
+     mov di,0
+     
+     input:
+     mov ah,1
+     int 21h
+     
+     cmp al,0dh
+     je new_line
+     
+     cmp al,'0'
+     jl new_line
+     cmp al,'9'
+     jg new_line
+     
+     and ax,000fh
+     push ax
+     mov ax,10
+     mul si
+     pop si
+     add si,ax
+     
+     jmp input
+     
+     new_line:
+     mov ah,2
+     mov dl,0dh
+     mov dl,0ah
+     int 21h
+     
+     input2:
+     
+     
+     mov ah,1
+     int 21h
+     
+     cmp al,0dh
+     je end
+     
+     cmp al,'0'
+     jl end
+     cmp al,'9'
+     jg end
+     
+     and ax,000fh
+     push ax
+     mov ax,10
+     mul di
+     pop di
+     add di,ax
+     
+     jmp input2
+     
+     end:
+     mov ah,2
+     mov dl,0dh
+     mov dl,0ah
+     int 21h
+     
+     mov ax,0
+     mov ax,si
+     mov bx,di
+     div bl
+     mov di,ax
+     
+     mov bx,10
+     xor cx,cx
+          
+     repeat:
+     xor dx,dx
+     div bx
+     push dx
+     inc cx
+     or ax,ax
+     jne repeat
+     
+     mov ah,2
+     output:
+     pop dx
+     or dl,30h
+     int 21h
+     loop output
+     
+     
+     
+     exit:
+     mov ah,4ch
+     int 21h
+     main endp
+end main
